@@ -7,14 +7,26 @@
  <meta http-equiv="X-UA-Compatible" content="ie=edge">
  <style rel="stylesheet" href='reset.css'></style>
  <style rel="stylesheet" href='style.css'></style>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
- <script src = "https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.amd.js"></script>
+ 
 
 <title>Document</title>
 </head>
 
 <body>
-<script src = 'main.js'></script> 
+    <script id="picture-template" type="text/x-handlebars-template">
+        {{title}
+        {{}}
+      
+        <br><br>
+      
+        {{description.unescaped}}
+        {{{example}}}
+    </script>
+      
+    <div class="content-placeholder"></div>
+    <script src = 'main.js'></script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.amd.js"></script>
 </body>
 
 </html>
