@@ -1,5 +1,10 @@
 'use strict';
 
+
+const allKeys = [];
+const allPics = [];
+var page =1;
+
 function Picture(obj,page){
   this.img_url = obj.image_url;
   this.title = obj.title;
@@ -10,12 +15,12 @@ function Picture(obj,page){
 
   if (!allKeys.includes(obj.keyword)) allKeys.push(obj.keyword);
   allPics.push(this);
-  console.log(this);
+  this.render();
 }
 
 
 Picture.prototype.render = function() {
-  $('body').append(`<div class="clone"></div>`);
+  $('main').append(`<div class="clone"></div>`);
   let $clone = $('div[class="clone"]');
   // Grab the template script
   let pictureTemplate = $('#picture-template').html();
@@ -34,19 +39,17 @@ Picture.prototype.render = function() {
   // Add the compiled html to the page
   $clone.html(theCompiledHtml);
   $clone.attr('class', this.keyword);
-  $clone.attr('class', this.page);
+  $clone.addClass(`${this.page}`);
   $clone.removeClass('clone');
 
 };
-
-const allKeys = [];
-const allPics = [];
 
 function readJson (json, page) {
   $.get(json, 'json').then(data =>{
     data.forEach(picObj=>{
       new Picture(picObj,page);
     })
+    console.log(allPics);
   }).then(() =>{
     allKeys.forEach((key)=>{
       $('select').append('<option class="opt"></option>');
@@ -55,16 +58,11 @@ function readJson (json, page) {
       $opt.removeClass('opt');
       $opt.attr('id',key);
     })
-  }).then(() => {
-    allPics.forEach(picture => {
-      picture.render();
-    })
   })
 }
 
 $('select').on('change', function(){
   let selection = $(this).val();
-  console.log(selection);
   if(selection==='default'){
     $('main div').show();
   }else{
@@ -73,12 +71,25 @@ $('select').on('change', function(){
   }
 });
 
+$(function () {
+  $('#1').on('click', function(){
+    $('main div').hide();
+    $('.1').show();
+  })
+})
 
-readJson('./data/page-1.json',1);
-readJson('./data/page-2.json',2);
+$(function () {
+  $('#2').on('click', function(){
+    $('main div').hide();
+    $('.2').show();
+  })
+})
 
 
 
 function init (){
-
+  readJson('./data/page-1.json',1);
+  readJson('./data/page-2.json',2);
 }
+
+init();
