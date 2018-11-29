@@ -12,23 +12,28 @@
 <title>Document</title>
 </head>
 <body>
+  
     <header>
       <h1>The Gallery of Horns</h1>
       <select>
         <option value="default">Filter by Keyword</option>
       </select>
+    </header>
+    <main>
+        <script id="picture-template" type="text/x-handlebars-template">
+          <div class="name">      
+            {{{title}}}
+          </div>
+          {{{img}}}     
+          {{description}}
+        </script>
+    </main>
+    <footer>
       <nav class = "links" id = "pageNav">
         <div id="1">Page 1</div>
         <div id="2">Page 2</div>
       </nav>
-    </header>
-    <main>
-        <script id="picture-template" type="text/x-handlebars-template">
-            {{title}}
-            {{{img}}}     
-            {{description}}
-        </script>
-    </main>
+    </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src = './js/app.js'></script> 
 </body>

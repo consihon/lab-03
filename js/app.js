@@ -3,7 +3,6 @@
 
 const allKeys = [];
 const allPics = [];
-var page =1;
 
 function Picture(obj,page){
   this.img_url = obj.image_url;
@@ -30,7 +29,7 @@ Picture.prototype.render = function() {
 
   // Define our data object
   let context={
-    'title':`${this.title}`,
+    'title':`<h2>${this.title}</h2>`,
     'img':`<img src="${this.img_url}">` ,
     'description': `${this.description}`
   };
@@ -49,7 +48,6 @@ function readJson (json, page) {
     data.forEach(picObj=>{
       new Picture(picObj,page);
     })
-    console.log(allPics);
   }).then(() =>{
     allKeys.forEach((key)=>{
       $('select').append('<option class="opt"></option>');
@@ -64,25 +62,31 @@ function readJson (json, page) {
 $('select').on('change', function(){
   let selection = $(this).val();
   if(selection==='default'){
-    $('main div').show();
+    $('.1').show();
+    $('footer').show();
   }else{
     $('main div').hide();
     $('.'+selection).show();
   }
 });
 
+function renderpage1(){
+  console.log('renderpage1')
+  $('main div').attr('visibility','hidden');
+  $('.1').show();
+}
+
+function renderpage2(){
+  $('main div').attr('visibility','hidden');
+  $('.2').show();
+}
+
 $(function () {
-  $('#1').on('click', function(){
-    $('main div').hide();
-    $('.1').show();
-  })
+  $('#1').on('click', renderpage1());
 })
 
 $(function () {
-  $('#2').on('click', function(){
-    $('main div').hide();
-    $('.2').show();
-  })
+  $('#2').on('click', renderpage2());
 })
 
 
@@ -90,6 +94,7 @@ $(function () {
 function init (){
   readJson('./data/page-1.json',1);
   readJson('./data/page-2.json',2);
+  $('main div').hide();
 }
-
 init();
+
